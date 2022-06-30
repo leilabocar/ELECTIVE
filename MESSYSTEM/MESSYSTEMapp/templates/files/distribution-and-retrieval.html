@@ -1,0 +1,222 @@
+{% load static %}
+<!DOCTYPE html>
+
+<head>
+  <title>Distribution and Retrieval of Modules</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="{% static 'cssfiles/distribution.css' %}">
+  <style>
+    ul.topnav {
+      list-style-type: none;
+      margin: 0;
+      overflow: hidden;
+      background-color: lightgray;
+    }
+
+    ul.topnav li {
+      float: left;
+    }
+
+    ul.topnav li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+
+    ul.topnav li a:hover:not(.active) {
+      background-color: #111;
+    }
+
+    ul.topnav li.right {
+      float: right;
+    }
+
+    @media screen and (max-width: 100px) {
+
+      ul.topnav li.right,
+      ul.topnav li {
+        float: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  {% for message in messages %}
+	<div class="alert alert-success">
+        <a class="close" href="#" data-dismiss="alert">×</a>
+           {{ message }}
+    </div>
+	{% endfor %}
+  <ul class="topnav">
+    <li><a><img class="logo" src="{% static 'imgfiles/logo.png' %}"></a></li>
+    <li><a style="pointer-events: none">
+        <p style="font-size: 28px;"> Welcome, {{user.username}}</p>
+      </a></li>
+    <li class="right"><a href="{% url 'Logout' %}"><span class="glyphicon glyphicon-log-out"></span>
+        <p style="font-size:  20px;">Logout</p>
+      </a></li>
+    <li class="right"><a href="{% url 'Teacher_Transaction' %}"><span class="glyphicon glyphicon-user"></span>
+        <p style="font-size:  20px;"> History</p>
+      </a></li>
+  </ul>
+  <form name="myForm" , method="POST">
+    {% csrf_token %}
+    <div class="container">
+      <header class="heading"> DISTRIBUTION AND RETRIEVAL OF MODULES</header>
+      <hr>
+      </hr>
+      <div class="col-sm-11">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="row">
+              <div class="col-xs-4">
+                <label class="lrn">LRN :</label> </div>
+              <div id="lrn_div" class="col-xs-8">
+                {{form.lrn_student}}
+                <div id="lrn_error"></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <div class="row">
+              <div class="col-xs-4">
+                <label class="name"> Name :</label></div>
+              <div id="name_div" class="col-xs-8">
+                {{form.username}}
+                <div id="name_error"></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-4">
+            <label class="Quarter"> Quarter :</label>
+          </div>
+          <div id="quarter_div" class="col-xs-8">
+           {{form.quarter}}
+            <div id="quarter_error"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-11">
+        <div class="row">
+          <div class="col-xs-4">
+            <label class="Week"> Week:</label>
+          </div>
+          <div id="week_div" class="col-xs-8">
+            {{form.week}}
+            <div id="week_error"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-11">
+        <div class="row">
+          <div class="col-xs-4">
+            <label class="Week"> Status:</label>
+          </div>
+          <div id="week_div" class="col-xs-8">
+            {{form.status}}
+            <div id="week_error"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <div class="row">
+          <div class="col-xs-4">
+            <label class="Modules">Modules:</label>
+          </div>
+          <div class="Modules">
+            {{form.modules}}
+          </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-center mt-5 button_container">
+        <input type="submit" value="SUBMIT" class="btn button1_btn">
+
+      </div>
+
+</body>
+
+</html>
+<script>
+	var lrn = document.forms['myForm']['lrn'];
+  var fname = document.forms['myForm']['fname'];
+  var quarter = document.forms["myForm"]["quarter"];
+  var week = document.forms["myForm"]["week"];
+  var name_error = document.getElementById('name_error');
+  var lrn_error = document.getElementById('lrn_error');
+  var quarter_error = document.getElementById('quarter_error');
+  var week_error = document.getElementById('week_error');
+  var radios = document.getElementsByName("contact");
+
+
+  function validateForm() {
+    if (lrn.value != "") {
+      lrn.style.border = "1px solid #5e6e66";
+      document.getElementById('lrn_div').style.color = "#5e6e66";
+      lrn_error.innerHTML = "";
+    }
+
+    if (lrn.value == "") {
+      lrn.style.border = "1px solid red";
+      document.getElementById('lrn_div').style.color = "red";
+      lrn_error.textContent = "LRN is required";
+      lrn.focus();
+      return false;
+    }
+
+    if (fname.value != "") {
+      fname.style.border = "1px solid #5e6e66";
+      document.getElementById('name_div').style.color = "#5e6e66";
+      name_error.innerHTML = "";
+    }
+
+    if (fname.value == "") {
+      fname.style.border = "1px solid red";
+      document.getElementById('name_div').style.color = "red";
+      name_error.textContent = "Name is required";
+      fname.focus();
+      return false;
+    }
+    if (quarter.value != "") {
+      quarter.style.border = "1px solid #5e6e66";
+      document.getElementById('quarter_div').style.color = "#5e6e66";
+      quarter_error.innerHTML = "";
+    }
+    if (quarter.selectedIndex < 1) {
+      quarter.style.border = "1px solid red";
+      document.getElementById('quarter_div').style.color = "red";
+      quarter_error.textContent = "Quarter must be selected";
+      quarter.focus();
+      return false;
+    }
+    if (week.value != "") {
+      week.style.border = "1px solid #5e6e66";
+      document.getElementById('week_div').style.color = "#5e6e66";
+      week_error.innerHTML = "";
+    }
+    if (week.selectedIndex < 1) {
+      week.style.border = "1px solid red";
+      document.getElementById('week_div').style.color = "red";
+      week_error.textContent = "Week must be selected";
+      week.focus();
+      return false;
+    }
+    while (!formValid && i < radios.length) {
+      if (radios[i].checked) formValid = true;
+      i++;
+    }
+
+    if (!formValid) alert("Must check some option!")
+    return formValid;
+  }
+</script>

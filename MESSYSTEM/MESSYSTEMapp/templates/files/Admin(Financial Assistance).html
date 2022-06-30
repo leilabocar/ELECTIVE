@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin(Student Reports)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="{% static 'cssfiles/admin1.css' %}">
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
+    <a class="navbar-brand" href="#"><img class="logo" src="{% static 'imgfiles/logo.png' %}">Student Reports</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+      <span class="navbar=toggler-icon"></span>
+    </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+        </div>
+    </div>
+    </nav>
+
+    <div style="overflow-x:auto;">
+    <table class="table table-bordered table-dark table-hover">
+<thead>
+    <th>LRN</th>
+    <th>Name of Student</th>
+    <th>Quarter</th>
+    <th>Week</th>
+    <th>Modules</th>
+    <th>Status</th>
+</thead>
+    <tbody>
+        {% for scholar in scholar_list %}
+        <tr>
+            <td>{{scholar.lrn_student_id}}</td>
+            <td>{{scholar.username}}</td>
+            <td>{{scholar.quarter}}</td>
+            <td>{{scholar.week}}</td>
+            <td>{{scholar.modules}}</td>
+            <td>{{scholar.status}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+</div>
+<div class="container">
+  <form id="frm" action="" method="POST">
+  <a href="{% url 'Admin_Homepage' %}" class="btn btn-info btn-hover" role="button">Back</a>
+<a href="{% url 'Admin_Distribution' %}" class="btn btn-info float-sm-right" name="sub" role="button">Financial Assistance</a>
+<a href="{% url 'Admin_Financial_Assistance_Pdf' %}" class="btn btn-info float-sm-right" name="sub" role="button">Export PDF</a>
+</form>
+  <script>
+  function myFunction()
+  {document.getElementById("frm").submit();}
+  </script>
+  <script>
+      function myFunction1()
+      {document.getElementById("frm").submit();}
+  </script>
+</div>
+<div>
+  
+</body>
+</html>

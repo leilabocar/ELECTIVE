@@ -1,0 +1,215 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin(F.A Distribution)</title>
+ 
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="{% static 'cssfiles/admin.css' %}">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <style>
+        ul.topnav {
+                  list-style-type: none;
+                  margin: 0;
+                  overflow: hidden;
+                  background-color: blanchedalmond;
+                }
+
+                ul.topnav li {float: left;}
+
+                ul.topnav li a {
+                  display: block;
+                  color: white;
+                  text-align: center;
+                  padding: 4px 4px;
+                  text-decoration: none;
+                }
+
+                ul.topnav li a:hover:not(.active) {background-color: #111;}
+                ul.topnav li.right {float: right; }
+
+                @media screen and (max-width: 100px) {
+                  ul.topnav li.right, 
+                  ul.topnav li {float: none;}
+                }
+    </style>
+</head>
+<body>
+    {% for message in messages %}
+	<div class="alert alert-success">
+        <a class="close" href="#" data-dismiss="alert">×</a>
+           {{ message }}
+    </div>
+	{% endfor %}
+    <ul class="topnav">
+      <li><a><img class="logo" src="{% static 'imgfiles/logo.png' %}"></a></li>
+      <li><a style="pointer-events: none"><p style="font-size: 28px;">Distribution of Financial Assistance</p></a></li>
+    </ul>
+
+    
+    <div class="container-fluid"><Br>
+        <form id="frm1" action="" method="POST">
+        {% csrf_token %}
+            <div class="row">
+                <div style="overflow-x:hidden;" class="col-sm-7">
+                    <table class="table table-bordered table-dark table-hover">
+                <thead>
+
+                    <th>Approved Students</th>
+                    <th>LRN</th>
+                    <th>Assistance Amount</th>
+                    <th>Action</th>
+                </thead>
+                    <tbody>
+                        {% for scholar in scholarship_list %}
+                        <tr>
+                            <td>{{scholar.username}}</td>
+                            <td>{{scholar.lrn_scholarship_id}}</td>
+                            <td>{{scholar.amount}}</td>
+                            <td><a href="{% url 'AdminFAD_Update' scholar.pk %}"><button type="button" class="btn btn-secondary">Update</button></a>
+                                <a href="{% url 'AdminFAD_Delete' scholar.pk %}"><button type="button" class="btn btn-danger">Delete</button></a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                
+                  
+                    </div>
+                    <div class="col-sm-4">
+                        
+                        <div  class="col-sm-12">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <label class="student">Lrn: </label> </div>
+                        <div id="student_div" class="col-xs-8">
+                            {{form.lrn_scholarship}}
+                            <div id="student_error"></div>
+                        </div>
+                    </div>
+                </div>
+                        <br>
+                        <div  class="col-sm-12">
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <label class="lrn">Name: </label> </div>
+                                <div id="lrn_div" class="col-xs-8">
+                                    {{form.username}}
+                                    <div id="lrn_error"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div  class="col-sm-12">
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <label class="assistance"> Assistance Amount:</label>
+                                </div>
+                                <div id="assistance_div" class="col-xs-8">
+                                    {{form.amount}}
+                                    <div id="assistance_error"></div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <br>
+                        <input type="submit" value="Save" class="btn btn-success float-sm-right">
+                        <a href="{% url 'Admin_Financial_Assistance' %}" class="btn btn-info float-sm-left" role="button">Back</a>
+            </form>
+            <a href ="{% url 'Admin_Distribution_Pdf' %}" class="btn btn-primary float-sm-right">Export PDF</button></a>
+                    <script>
+                        var student = document.forms['frm1']['student'];
+                        var student_error = document.getElementById('student_error');
+                        var lrn = document.forms['frm1']['lrn'];
+                        var lrn_error = document.getElementById('lrn_error');
+                        var grade = document.forms['frm1']['grade'];
+                        var grade_error = document.getElementById('grade_error');
+                        var section = document.forms['frm1']['section'];
+                        var section_error = document.getElementById('section_error');
+                        var assistance = document.forms['frm1']['assistance'];
+                        var assistance_error = document.getElementById('assistance_error');
+
+                        function Validate() {
+                            if (student.value != "") {
+                                student.style.border = "1px solid #5e6e66";
+                                document.getElementById('student_div').style.color = "#5e6e66";
+                                student_error.innerHTML = "";
+                            } 
+                      
+                            if (student.value == "") {
+                              student.style.border = "1px solid red";
+                              document.getElementById('student_div').style.color = "red";
+                              student_error.textContent = "Name is required";
+                              student.focus();
+                              return false;
+                            }
+                            if (lrn.value != "") {
+                                lrn.style.border = "1px solid #5e6e66";
+                                document.getElementById('lrn_div').style.color = "#5e6e66";
+                                lrn_error.innerHTML = "";
+                            } 
+                      
+                            if (lrn.value == "") {
+                              lrn.style.border = "1px solid red";
+                              document.getElementById('lrn_div').style.color = "red";
+                              lrn_error.textContent = "LRN is required";
+                              lrn.focus();
+                              return false;
+                            }
+                            if (grade.selectedIndex < 1) {
+                              grade.style.border = "1px solid red";
+                              document.getElementById('grade_div').style.color = "red";
+                              grade_error.textContent = "Grade is required";
+                              grade.focus();
+                              return false;
+                            }
+
+                            if (grade.value != "") {
+                              grade.style.border = "1px solid #5e6e66";
+                              document.getElementById('grade_div').style.color = "#5e6e66";
+                              grade_error.innerHTML = "";
+                            }
+                            if (section.selectedIndex < 1) {
+                                section.style.border = "1px solid red";
+                                document.getElementById('section_div').style.color = "red";
+                                section_error.textContent = "Section is required";
+                                section.focus();
+                                return false;
+                            }
+  
+                              if (section.value != "") {
+                                section.style.border = "1px solid #5e6e66";
+                                document.getElementById('section_div').style.color = "#5e6e66";
+                                section_error.innerHTML = "";
+                            }
+                            if (assistance.selectedIndex < 1) {
+                                assistance.style.border = "1px solid red";
+                                document.getElementById('assistance_div').style.color = "red";
+                                assistance_error.textContent = "Amount is required";
+                                assistance.focus();
+                                return false;
+                              }
+  
+                              if (assistance.value != "") {
+                                assistance.style.border = "1px solid #5e6e66";
+                                document.getElementById('assistance_div').style.color = "#5e6e66";
+                                assistance_error.innerHTML = "";
+                              }
+
+                        }
+                    </script>
+
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>  
+        
+    </div>
+
+</body>
+</html>

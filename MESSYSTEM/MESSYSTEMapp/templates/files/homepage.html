@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Homepage</title>
+        <link rel="stylesheet" type="text/css" href="static/cssfiles/homepagecss.css">
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+    </head>
+<body>
+{% block content %}
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    -->
+    <header class="header">
+    <nav class="navbar navbar-style">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#micon">
+                <span class="icon-bar"></span>    
+                <span class="icon-bar"></span>  
+                <span class="icon-bar"></span>  
+                </button>
+           <img class="logo" src="static/imgfiles/logo.png">
+            Maricaban Elementary School
+            </div>
+            <div class="collapse navbar-collapse" id="micon">
+            <ul class="nav navbar-nav navbar-right">
+            <li><a class="btn btn-login" href="{% url 'Login' %}">Login</a></li>
+            <li><a class="btn btn-announcement" data-toggle="modal" data-target="#announcement" href="">Announcement</a></li>
+            <li><a class="btn btn-contact" data-toggle="modal" data-target="#contact" href="">Contact</a></li>
+            <li><a class="btn btn-aboutus" data-toggle="modal" data-target="#aboutus" href="">About Us</a></li>
+            </ul>
+            <div class="modal fade" id="announcement" role="dialog">
+                <div class="modal-dialog">
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Announcement</h4>
+                    </div>
+                    {% if announcement %}
+                    <div class="modal-body">
+                      <p>Submission of Modules:</p>
+                      <p>{{announcement.subm}} </p> </p>
+                      <p>Retrieval of Modules</p>
+                      <p>{{announcement.ret}} </p></p>
+                    </div>
+                    {% endif %}
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="modal fade" id="contact" role="dialog">
+                <div class="modal-dialog">
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Contact</h4>
+                    </div>
+                    <div class="modal-body">
+                      <p>Visit us at:</p>
+                      <p>Saint Francis St., Brgy. 179 Maricaban, Pasay City</p>
+                      <p>Call us at:</p>
+                      <p>Telefax no. (02) 851-6890</p>
+                      <p>Reach us thru e-mail:</p>
+                      <p>E-mail Add: 136594@deped.gov.ph</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="modal fade" id="aboutus" role="dialog">
+                <div class="modal-dialog">
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">About Us</h4>
+                    </div>
+                    <div class="modal-body">
+                      <p>In line with the global competitive world in education, Maricaban Elementary School is the show window of Pasay City in terms of Academic and extra-curricular successful winning events.  
+                        As our school was established in 1994, the starting point wherein teachers linked with the community to produce well rounded learners with sound mind and body. Our teachers are highly dedicated 
+                        and responsible in their work/ profession for the development of the learners’ full potential in the field of learning for them to become the asset of the nation.</p>
+                        <p>MES is a “catalyst of change” as it is intensified by the School Head. Change is inevitable but through his proper guidance the change will be from positive to best practices as it benefits the success of the teaching and learning process. It cater our most important client…the LEARNERS…the hope of our country.</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+        </div>
+        </nav>
+        <div class="bg-img"><br><br><br><br><br>
+          <div class="container">
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+              <!-- Indicators -->
+              <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+                <li data-target="#myCarousel" data-slide-to="3"></li>
+              </ol>
+            
+              <!-- Wrapper for slides -->
+              <div class="carousel-inner">
+                <div class="item active">
+                  <img src="static/imgfiles/mission.png" alt="mission" class="img-responsive">
+                </div>
+            
+                <div class="item">
+                  <img src="static/imgfiles/vision.png" alt="vision" class="img-responsive">
+                </div>
+            
+                <div class="item">
+                  <img src="static/imgfiles/corevalues.png" alt="corevalues" class="img-responsive">
+                </div>
+                <div class="item">
+                  <img src="static/imgfiles/objectives.png" alt="objectives">
+                </div>
+              </div>
+            
+              <!-- Left and right controls -->
+              <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
+          </div>
+        </div>
+{% endblock %}
+</body>

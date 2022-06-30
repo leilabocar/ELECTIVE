@@ -1,0 +1,61 @@
+{% load static %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Transaction</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="{%static 'cssfiles/s-transactions.css' %}">
+</head>
+<body>
+	<nav class="navbar navbar-style">
+		<div class="navbar header">
+			<a class="navbar-brand" href="#"> <img class="logo" src="{%static 'imgfiles/logo.png' %}"></a>
+			<h1 style="font-size: 40px;font-family: sans-serif;color: rgb(5, 5, 5);">STUDENT TRANSACTION</h1>
+		</div>
+    
+        </nav>  
+        <div>
+          <form id="frm" action="" method="get">
+              {% csrf_token %}
+                <div class="d-flex flex-row">
+                  <div class="p-2">
+                    {% render_field myFilter.form.username class="form-control.d-sm-inline-flex" placeholder='Username:' %}</div>
+                  <div class="float-right"> <button type="submit" class="btn btn-primary float-righ">Search</button></div>
+                </div>
+              
+          </form>
+        </div>
+
+    <div style="overflow-x:auto;" class="col-sm-12">
+    <table class="table table-bordered table-dark table-hover">
+<thead>
+    <th>LRN</th>
+    <th>Name of Student</th>
+    <th>Quarter</th>
+    <th>Week</th>
+    <th>Modules</th>
+    <th>Status</th>
+</thead>
+    <tbody>
+        {% for student in student %}
+        <tr>
+            <td>{{student.lrn_student_id}}</td>
+            <td>{{student.username}}</td>
+            <td>{{student.quarter}}</td>
+            <td>{{student.week}}</td>
+            <td>{{student.modules}}</td>
+            <td>{{student.status}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+  <a href="{% url 'Admin_Homepage' %}" class="button1 btn-info btn-hover" role="button">Back</a>
+  <a href ="{% url 'Student_Transaction_Pdf' %}" class="btn btn-primary float-sm-right">Export PDF</button></a>
+
+</body>
+</html>

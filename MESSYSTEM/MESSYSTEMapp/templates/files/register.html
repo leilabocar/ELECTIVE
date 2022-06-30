@@ -1,0 +1,297 @@
+{% load static %}
+<!Doctype html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Registration Form</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="{%static 'cssfiles/registrationcss.css' %}">
+
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+</head>
+
+<body>
+	{% for message in messages %}
+	<div class="alert alert-success">
+        <a class="close" href="#" data-dismiss="alert">×</a>
+           {{ message }}
+    </div>
+	{% endfor %}
+	<nav class="navbar navbar-style">
+		<div class="navbar header">
+			<a class="navbar-brand" href="#"> <img class="logo" src="{%static 'imgfiles/logo.png' %}"></a>
+			<h1 style="font-size: 40px;font-family: sans-serif;">Maricaban Elementary School</h1>
+		</div> 
+	<form name="vform", method="POST"> 
+			{% csrf_token %}
+		<div class="container">
+			<p style="color: white; font-size: 25px;">R E G I S T E R</p>
+			<hr></hr>
+			<div class="row ">
+				<div  class="col-sm-12">
+					<div class="row">
+						<div class="col-xs-4">
+							<label class="lrn">Lrn:</label> </div>
+						<div id="lrn_div" class="col-xs-8">
+							{{form.lrn}}
+							<div id="lrn_error"></div>
+						</div>
+					</div>
+				</div>
+				<div  class="col-sm-12">
+					<div class="row">
+						<div class="col-xs-4">
+							<label class="name">Username:</label></div>
+						<div id="name_div" class="col-xs-8">
+							{{form.username}}
+							<div id="name_error"></div>
+						</div>
+					</div>
+				</div>
+				<div  class="col-sm-12">
+					<div class="row">
+						<div class="col-xs-4">
+							<label class="pass">Password:</label></div>
+						<div id="pass_div" class="col-xs-8">
+							{{form.password1}}
+							<div id="pass_error"></div>
+						</div>
+					</div>
+				</div>
+				<div  class="col-sm-12">
+					<div class="row">
+						<div class="col-xs-4">
+							<label class="parent">Confirm Password:</label></div>
+						<div id="parent_div" class="col-xs-8">
+							{{form.password2}}
+							<div id="parent_error"></div>
+						</div>
+					</div>
+				</div>
+				<div  class="col-sm-12">
+					<div class="row">
+						<div class="col-xs-4">
+							<label class="contact">Contact Number:</label></div>
+						<div id="contact_div" class="col-xs-8">
+							{{form.contacts}}
+							<div id="contact_error"></div>
+						</div>
+					</div>
+				</div>
+				<div  class="col-sm-12">
+					<div class="row">
+						<div class="col-xs-4">
+							<label class="contact">Email: </label></div>
+						<div id="contact_div" class="col-xs-8">
+							{{form.email}}
+							<div id="contact_error"></div>
+						</div>
+					</div>
+				</div>
+					<div  class="col-sm-12">
+						<div class="row">
+							<div class="col-xs-4">
+								<label class="adviser">Parent:</label>
+							</div>
+							<div id="adviser_div" class="col-xs-8">
+								{{form.parents}}
+								<div id="adviser_error"></div>
+							</div>
+							
+						</div>
+					</div>
+					<div  class="col-sm-12">
+						<div class="row">
+							<div class="col-xs-4">
+								<label class="grade">Grade:</label>
+							</div>
+							<div id="grade_div" class="col-xs-8">
+								{{form.gradelvl}}
+								<div id="grade_error"></div>
+							</div>
+							
+						</div>
+					</div>	
+					<div  class="col-sm-12">
+						<div class="row">
+							<div class="col-xs-4">
+								<label class="section">Adviser:</label>
+							</div>
+							<div id="section_div" class="col-xs-8">
+								{{form.adviser}}
+								<div id="section_error"></div>
+							</div>
+						</div>
+					</div>
+					<div  class="col-sm-12">
+						<div class="row">
+							<div class="col-xs-4">
+								<label class="section">Section:</label>
+							</div>
+							<div id="section_div" class="col-xs-8">
+								{{form.section}}
+								<div id="section_error"></div>
+							</div>
+						</div>
+					</div>
+					<div  class="col-sm-12">
+						<div class="row">
+							<div class="col-xs-4">
+								<label class="section">User:</label>
+							</div>
+							<div id="section_div" class="col-xs-8">
+								{{form.userType}}
+								<div id="section_error"></div>
+							</div>
+						</div>
+					</div>
+			</div>
+				<div>
+					<a href="{% url 'Admin_Homepage' %}" class="btn btn-primary btn-hover" role="button">Back</a>
+					<button type="submit" class="btn px-5>">Submit</button>
+				</div>
+			</div>
+		</nav>
+</form>
+</body>
+</html>
+
+<script>
+	var lrn = document.forms['vform']['lrn'];
+	var fname = document.forms['vform']['fname'];
+	var pass = document.forms['vform']['pass'];
+	var parent = document.forms['vform']['parent'];
+	var contact = document.forms['vform']['contact'];
+	var adviser = document.forms['vform']['adviser'];
+	var grade = document.forms['vform']['grade'];
+	var section = document.forms['vform']['section'];
+	// SELECTING ALL ERROR DISPLAY ELEMENTS
+	var name_error = document.getElementById('name_error');
+	var lrn_error = document.getElementById('lrn_error');
+	var pass_error = document.getElementById('pass_error');
+	var parent_error = document.getElementById('parent_error');
+	var contact_error = document.getElementById('contact_error');
+	var adviser_error = document.getElementById('adviser_error');
+	var grade_error = document.getElementById('grade_error');
+	var section_error = document.getElementById('section_error');
+	function Validate() {
+	  if (lrn.value != "") {
+	  	lrn.style.border = "1px solid #5e6e66";
+	  	document.getElementById('lrn_div').style.color = "#5e6e66";
+	  	lrn_error.innerHTML = "";
+	  } 
+
+	  if (lrn.value == "") {
+	    lrn.style.border = "1px solid red";
+	    document.getElementById('lrn_div').style.color = "red";
+	    lrn_error.textContent = "LRN is required";
+	    lrn.focus();
+	    return false;
+	  }
+
+	  if (fname.value != "") {
+	   fname.style.border = "1px solid #5e6e66";
+	   document.getElementById('name_div').style.color = "#5e6e66";
+	   name_error.innerHTML = "";
+	  }
+
+	  if (fname.value == "") {
+	    fname.style.border = "1px solid red";
+	    document.getElementById('name_div').style.color = "red";
+	    name_error.textContent = "Name is required";
+	    fname.focus();
+	    return false;
+	  }
+	  // validate password
+	  if (pass.value != "") {
+	  	pass.style.border = "1px solid #5e6e66";
+	  	document.getElementById('pass_div').style.color = "#5e6e66";
+	  	pass_error.innerHTML = "";
+	  }
+
+	  if (pass.value == "") {
+	    pass.style.border = "1px solid red";
+	    document.getElementById('pass_div').style.color = "red";
+	    pass_error.textContent = "Password is required";
+	    pass.focus();
+	    return false;
+	  }
+
+	  if (parent.value != "") {
+	    parent.style.border = "1px solid #5e6e66";
+	    document.getElementById('parent_div').style.color = "#5e6e66";
+	    parent_error.innerHTML = "";
+	  }
+
+	  if (parent.value == "") {
+	    parent.style.border = "1px solid red";
+	    document.getElementById('parent_div').style.color = "red";
+	    parent_error.textContent = "Parent is required";
+	    parent.focus();
+	    return false;
+	  }
+
+	  if (contact.value != "") {
+	    contact.style.border = "1px solid #5e6e66";
+	    document.getElementById('contact_div').style.color = "#5e6e66";
+	    contact_error.innerHTML = "";
+	  }
+
+	  if (contact.value == "") {
+	    contact.style.border = "1px solid red";
+	    document.getElementById('contact_div').style.color = "red";
+	    contact_error.textContent = "Contact Number is required";
+	    contact.focus();
+	    return false;
+	  }
+
+	  if (adviser.value != "") {
+	    adviser.style.border = "1px solid #5e6e66";
+	    document.getElementById('adviser_div').style.color = "#5e6e66";
+	    adviser_error.innerHTML = "";
+	  }
+
+	  if (adviser.selectedIndex < 1) {
+	    adviser.style.border = "1px solid red";
+	    document.getElementById('adviser_div').style.color = "red";
+	    adviser_error.textContent = "Adviser is required";
+	    adviser.focus();
+	    return false;
+	  }
+	  if (grade.selectedIndex < 1) {
+	    grade.style.border = "1px solid red";
+	    document.getElementById('grade_div').style.color = "red";
+	    grade_error.textContent = "Grade is required";
+	    grade.focus();
+	    return false;
+	  }
+
+	  if (grade.value != "") {
+	    grade.style.border = "1px solid #5e6e66";
+	    document.getElementById('grade_div').style.color = "#5e6e66";
+	    grade_error.innerHTML = "";
+	  }
+
+	  if (section.value != "") {
+	    section.style.border = "1px solid #5e6e66";
+	    document.getElementById('section_div').style.color = "#5e6e66";
+	    section_error.innerHTML = "";
+	  }
+	  if (section.selectedIndex < 1) {
+	    section.style.border = "1px solid red";
+	    document.getElementById('section_div').style.color = "red";
+	    section_error.textContent = "Section is required";
+	    section.focus();
+	    return false;
+	  }
+	}
+</script>

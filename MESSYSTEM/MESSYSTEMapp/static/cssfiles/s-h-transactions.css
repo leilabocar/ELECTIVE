@@ -1,0 +1,78 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Cambria;
+    font-size: 18px;
+
+}
+
+body {
+    background-image: url("../imgfiles/learning.jpeg");
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    position: sticky;
+}
+
+.logo {
+    height: 60px;
+    padding: 1px 0px;
+}
+
+.container {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    position: relative;
+    max-width: 1850px;
+}
+
+.table.table-bordered.table-dark.table-hover {
+    margin-top: 20px;
+}
+
+.table {
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 400px;
+    height: 55vh;
+    border-radius: 5px 5px 0 0;
+    margin-bottom: 70px;
+    position: relative;
+}
+
+.table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+    font-weight: bold;
+}
+
+.table tbody tr {
+    background-color: rgb(1, 56, 47);
+    border-bottom: 1px solid #dddddd;
+}
+
+.table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+.table tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+}
+.button1 {
+    transition-duration: 0.4s;
+    margin-left: 10px;
+    font-size: 16px;
+    border-radius: 12px;
+    padding: 8px 25px;
+    margin-right: 20px;
+    text-decoration: none;
+}
+
+.button1:hover {
+    background-color: #4CAF50;
+    /* Green */
+    color: white;
+}
