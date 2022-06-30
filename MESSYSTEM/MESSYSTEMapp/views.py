@@ -160,34 +160,26 @@ def student_transaction(request):
     'myFilter':myFilter})
 
 def pdf_assistance(request):
-    #create byteststream buffer
     buf = io.BytesIO()
-    #create document template
     pdf = SimpleDocTemplate(buf, pagesize=letter)
-    #content
     scholar_list = studentInfo.objects.filter(status='Approved')
     data = [['Lrn','Username','Quarter','Week','Modules','Status',]]
     for scholar in scholar_list:
         data.append([scholar.lrn_student_id,scholar.username,scholar.quarter,scholar.week,scholar.modules,scholar.status])
     elems = []
-    #table
     elems.append(Table(data))
     pdf.build(elems)
     buf.seek(0)
     return FileResponse(buf, as_attachment=True, filename='Admin_Approved_Student.pdf')
 
 def pdf_student_transaction(request):
-    #create byteststream buffer
     buf = io.BytesIO()
-    #create document template
     pdf = SimpleDocTemplate(buf, pagesize=letter)
-    #content
     students = studentInfo.objects.all()
     data = [['Lrn','Username','Quarter','Week','Modules','Status']]
     for student in students:
         data.append([student.lrn_student_id,student.username,student.quarter,student.week,student.modules,student.status])
     elems = []
-    #table
     elems.append(Table(data))
     pdf.build(elems)
     buf.seek(0)
@@ -195,21 +187,16 @@ def pdf_student_transaction(request):
     return FileResponse(buf, as_attachment=True, filename='Admin_Student_Transaction.pdf')
 
 def pdf_distribution(request):
-    #create byteststream buffer
     buf = io.BytesIO()
-    #create document template
     pdf = SimpleDocTemplate(buf, pagesize=letter)
-    #content
     scholarship_list = scholarship.objects.all()
     data = [['Lrn','Username','Amount']]
     for scholar in scholarship_list:
         data.append([scholar.lrn_scholarship_id,scholar.username,scholar.amount])
     elems = []
-    #table
     elems.append(Table(data))
     pdf.build(elems)
     buf.seek(0)
-    #filename
     return FileResponse(buf, as_attachment=True, filename='Admin_Scholars.pdf')
 
 #------------------------------------------TEACHER
@@ -261,23 +248,18 @@ def teacher_transaction_update(request, lrn_student):
     return render(request, 'files/distribution-and-retrieval.html', {'student':student,'form':form})
 
 def pdf_teacher_transaction(request):
-    #create byteststream buffer
     buf = io.BytesIO()
-    #create document template
     pdf = SimpleDocTemplate(buf, pagesize=letter)
-    #content
     students = studentInfo.objects.all()
     data = [['Lrn','Username','Quarter','Week','Modules','Status',]]
-    #loop
     for student in students:
         data.append([student.lrn_student_id,student.username,student.quarter,student.week,student.modules,student.status])
     elems = []
-    #table
     elems.append(Table(data))
     pdf.build(elems)
     buf.seek(0)
     return FileResponse(buf, as_attachment=True, filename='Teacher_Transaction.pdf')
-
+    
 #--------------------------------------------------student
 @login_required
 def student_history_transaction(request, username):
