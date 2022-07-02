@@ -1,10 +1,9 @@
 from random import choices
 from tabnanny import verbose
 from tkinter import CASCADE
-from typing_extensions import Required
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from typing_extensions import Required
+
 
 from django.forms import CharField
 
