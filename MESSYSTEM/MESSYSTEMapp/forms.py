@@ -110,7 +110,7 @@ class StudentSignupForm(UserCreationForm):
     email = forms.EmailField(
         widget= forms.EmailInput(
             attrs={
-                "placeholder": 'Email:',
+                "placeholder": 'Gmail Only',
                 "class": "form-control"
             }
 
@@ -166,10 +166,11 @@ class StudentSignupForm(UserCreationForm):
     )
 
     contacts = forms.CharField(
-        widget = forms.TextInput(
+        widget = forms.NumberInput(
             attrs={
-                "placeholder": 'Contacts',
-                "class": "form-control"
+                "placeholder": 'Ex: 09123456781',
+                "class": "form-control",
+                "maxlength": 11
             }
         )
     )
